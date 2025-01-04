@@ -2,8 +2,10 @@
     <div class="relative flex items-center justify-center w-full h-72 lg:h-96"
         style="background-image: url({{ asset('storage/' . $categories->image) }})">
         <div class="absolute top-0 left-0 z-30 size-full bg-black/80"></div>
-        <div class="z-40 p-6 pt-20 mx-auto text-xl font-bold text-center text-white max-w-7xl lg:px-8 lg:text-4xl">Kategori
-            <span class="capitalize">{{ " $categories->nama " }}</span> UMKM Desa Susut</div>
+        <div class="z-40 p-6 pt-20 mx-auto text-xl font-bold text-center text-white max-w-7xl lg:px-8 lg:text-4xl">
+            Kategori
+            <span class="capitalize">{{ " $categories->nama " }}</span> UMKM Desa Susut
+        </div>
     </div>
 
     <div class="grid grid-cols-1 gap-8 p-6 mx-auto lg:grid-cols-2 max-w-7xl lg:px-8">
@@ -14,14 +16,29 @@
             </div>
         </div>
         <div class="">
+            @auth
+                <div class="flex justify-start gap-4 mb-3 print:hidden">
+                    @if (Auth::user()->id == $umkm->user->id)
+                        <a href="{{ route('umkm.edit', ['umkm' => $umkm->slug]) }}"
+                            class="px-3 py-2 space-y-2 bg-yellow-300 rounded-lg cursor-pointer"><i
+                                class="bx bx-edit"></i>Edit</a>
+                        <form action="{{ route('umkm.destroy', ['umkm' => $umkm->slug]) }}" method="post">
+                            <button type="submit" class="px-3 py-2 space-y-2 rounded-lg cursor-pointer bg-rose-500"><i
+                                    class="bx bx-trash"></i>Hapus</button>
+                        </form>
+                    @endif
+                    <div href="" class="hidden px-3 py-2 space-y-2 bg-blue-400 rounded-lg cursor-pointer lg:block"><i
+                            class="bx bx-printer" onclick="printPage()"></i>Cetak</div>
+                </div>
+            @endauth
             <div class="">
                 <div class="pb-2 text-xl font-bold">Deskripsi</div>
                 <div class="max-w-full p-2 text-white rounded-xl bg-mine-100 w-fit ">{{ $umkm->deskripsi }}</div>
             </div>
             <div class="mt-3">
                 <div class="pb-2 text-xl font-bold">Lokasi Usaha</div>
-                <div
-                    class="max-w-full p-2 text-white rounded-xl bg-mine-100 "><a target="_blank" rel="noreferrer" href="{{ $umkm->maps }}" class="">{{ $umkm->alamat }}</a></div>
+                <div class="max-w-full p-2 text-white rounded-xl bg-mine-100 "><a target="_blank" rel="noreferrer"
+                        href="{{ $umkm->maps }}" class="">{{ $umkm->alamat }}</a></div>
             </div>
             <div class="mt-3">
                 <div class="pb-2 text-xl font-bold">Kontak</div>
@@ -54,3 +71,8 @@
 
 </x-app-layout>
 
+<script>
+    function printPage() {
+        window.print();
+    }
+</script>

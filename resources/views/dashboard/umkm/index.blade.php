@@ -13,7 +13,7 @@
                 <th class="text-start">Nama</th>
                 <th class="text-start">Owner</th>
                 <th class="text-start">alamat</th>
-                <th class="text-start">Kategori</th>
+                <th class="text-start">Kategori</th> 
                 <th class="text-start">Action</th>
             </tr>
         </thead>

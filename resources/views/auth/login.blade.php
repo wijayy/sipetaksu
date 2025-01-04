@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :title="'Login'">
     <!-- Session Status -->
     {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
 
@@ -26,12 +26,16 @@
                 {{ __('Masuk') }}
             </button>
 
-            @if (Route::has('password.request'))
-                <a class="flex justify-center w-full mt-1 mb-4 text-xs font-bold text-center text-gray-500"
+            <div class="flex flex-wrap mt-3">
+                <a class="flex justify-center w-1/2 mt-1 mb-4 text-xs font-bold text-center text-gray-500 focus:text-mine-100 hover:text-mine-100"
                     href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                    {{ __('Lupa Password?') }}
                 </a>
-            @endif
+                <a class="flex justify-center w-1/2 mt-1 mb-4 text-xs font-bold text-center text-gray-500 focus:text-mine-100 hover:text-mine-100"
+                    href="{{ route('register') }}">
+                    {{ __('Belum punya akun?') }}
+                </a>
+            </div>
         </form>
     </div>
 </x-guest-layout>

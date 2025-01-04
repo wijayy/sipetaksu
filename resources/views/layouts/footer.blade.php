@@ -1,4 +1,4 @@
-<section class="pb-4 text-white bg-mine-100">
+<section class="pb-4 text-white bg-mine-100 print:hidden">
     <div class="flex flex-wrap items-end p-6 mx-auto lg:justify-between lg:flex-nowrap max-w-7xl lg:px-8">
         <div class="w-full md:w-full lg:w-5/12">
             <a href="#" class="-m-1.5 p-1.5 flex items-center text-lg gap-2 font-semibold">

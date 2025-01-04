@@ -11,6 +11,7 @@
                         <th class="text-start">#</th>
                         <th class="text-start">Nama</th>
                         <th class="text-start">Email</th>
+                        <th class="text-start">Verified</th>
                         <th class="text-start">Jumlah UMKM</th>
                     </tr>
                 </thead>
@@ -19,6 +20,7 @@
                         <tr class="h-12 odd:bg-white">
                             <td class="pr-1">{{ $loop->iteration }}</td>
                             <td class="pr-2">{{ $item->name }}</td>
+                            <td class="pr-2">{{ $item->email }}</td>
                             <td class="pr-2">{{ $item->email }}</td>
                             <td class="pr-2">{{ $item->umkm->count() }}</td>
                         </tr>

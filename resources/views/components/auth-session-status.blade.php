@@ -1,7 +1,10 @@
 @props(['status'])
 
 @if ($status)
-    <div {{ $attributes->merge(['class' => 'font-medium text-sm text-green-600']) }}>
+    @php
+        $status = 'kami sudah mengirimkan email untuk permintaan reset password. silahkan cek email anda!';
+    @endphp
+    <div {{ $attributes->merge(['class' => 'font-medium text-sm text-mine-100']) }}>
         {{ $status }}
     </div>
 @endif

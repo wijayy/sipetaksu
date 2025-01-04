@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardCategoriesController;
 use App\Models\User;
+use Illuminate\Routing\Route as RoutingRoute;
 
 Route::get('/', function () {
     return view('home', [
@@ -28,7 +29,7 @@ Route::get('/tentang-kami', function () {
 Route::resource('kategori', CategoriesController::class)->only(['index', 'show']);
 Route::get('/kategori/{kategori}/{umkm}', [UmkmController::class, 'show'])->name('umkm.show');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -39,12 +40,15 @@ Route::middleware('auth')->group(function () {
             "kategori" => Categories::all(),
         ]);
     })->name("dashboard");
+    Route::resource('dashboard/umkm', UmkmController::class)->except(['show']);
+});
+
+Route::middleware(['auth', 'verified', 'admin'])->group(function() {
     Route::get('/dashboard/users', function () {
         return view('dashboard.user', [
             'users' => User::all()
         ]);
     })->name("dashboard.user");
-    Route::resource('dashboard/umkm', UmkmController::class)->except(['show']);
     Route::resource('dashboard/kategori', DashboardCategoriesController::class)->except(['show'])->names([
         'index' => 'dashboard.kategori.index',
         'create' => 'dashboard.kategori.create',
@@ -53,6 +57,7 @@ Route::middleware('auth')->group(function () {
         'update' => 'dashboard.kategori.update',
         'destroy' => 'dashboard.kategori.destroy',
     ]);
+
 });
 
 require __DIR__ . '/auth.php';

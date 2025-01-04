@@ -12,7 +12,6 @@ class Categories extends Model
     /** @use HasFactory<\Database\Factories\CategoriesFactory> */
     use HasFactory, Sluggable;
 
-
     protected $guarded = ['id'];
     protected $with = ['umkm'];
 
