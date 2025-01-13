@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/tentang-kami', function () {
     return view('about', [
-        'umkm' => Umkm::orderBy('dilihat', 'desc')->take(6)->get(),
+        'umkms' => UMKM::select('nama', 'latitude', 'longitude')->orderBy('dilihat', 'desc')->take(6)->get(),
     ]);
 })->name('about');
 

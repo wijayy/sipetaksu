@@ -37,6 +37,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+
     /**
      * Get the attributes that should be cast.
      *
@@ -46,6 +48,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'last_login' => 'datetime',
             'password' => 'hashed',
         ];
     }

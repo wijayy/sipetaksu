@@ -22,9 +22,12 @@ class UpdateUmkmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image.*' => ['file', 'image'],
+            'image' => ['file', 'image'],
+            'images.*' => ['file', 'image'],
             'nama' => ['required'],
             'categories_id' => "required|numeric",
+            'longitude' => "required|numeric",
+            'latitude' => "required|numeric",
             "kontak" => "required|starts_with:62",
             'maps' => "required|url:http,https",
             'jamBuka' => 'required',

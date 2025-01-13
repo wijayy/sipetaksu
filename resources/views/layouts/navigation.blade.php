@@ -20,7 +20,7 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-8 ">
-            <a href="{{ route('dashboard') }}" class="font-semibold text-sm/6">Beranda</a>
+            <a href="{{ route('home') }}" class="font-semibold text-sm/6">Beranda</a>
             <a href="{{ route('kategori.index') }}" class="font-semibold text-sm/6">UMKM</a>
             <a href="{{ route('about') }}" class="font-semibold text-sm/6">Tentang Kami</a>
             @guest

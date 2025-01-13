@@ -18,7 +18,7 @@ class UmkmFactory extends Factory {
     public function definition(): array {
         return [
             'nama' => fake()->sentence(2, false),
-            'kontak' => '00977907678',
+            'kontak' => '62977907678',
             "jamBuka" => fake()->time(),
             "slug" => fake()->slug(2, false),
             "jamTutup" => fake()->time(),
@@ -26,7 +26,9 @@ class UmkmFactory extends Factory {
             "alamat" => fake()->address(),
             'categories_id' => Categories::factory(),
             'user_id' => User::factory(),
-            'image' => 'umkm/produk.png',
+            'longitude' => 115.346701,
+            'latitude' => -8.423240,
+            'image' => 'foto/produk.png',
             "dilihat" => mt_rand(0, 20),
             "maps" => "https://maps.app.goo.gl/y1WTrMhsaeeTE1347"
         ];

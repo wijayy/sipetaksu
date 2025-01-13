@@ -18,10 +18,10 @@
                     <img src="{{ asset('asset/about.png') }}" class="rounded-7xl " alt="">
                 </div>
             </div>
-            <div class="px-4 pt-5 text-white" >
+            <div class="px-4 pt-5 text-white">
                 <div class="text-3xl">Tentang Kami</div>
                 <div class="mt-5 text-xl">“Selamat Datang di Website UMKM Desa Susut, Bangli “</div>
-                <div class="mt-5 text-lg"> Website ini merupakan pusat informasi lengkap tentang kegiatan, produk, dan
+                <div class="mt-5 text-lg">Website ini merupakan pusat informasi lengkap tentang kegiatan, produk, dan
                     inovasi yang dihasilkan oleh UMKM Desa Susut, Bangli. Kami hadir untuk memperkenalkan potensi desa
                     kami serta mendukung pertumbuhan ekonomi lokal melalui karya kreatif dan produk unggulan. Jelajahi
                     lebih jauh dan temukan beragam informasi menarik di sini.</div>
@@ -33,8 +33,33 @@
     <div class="">
         <div class="p-6 mx-auto max-w-7xl lg:px-8">
             <div class="w-full text-3xl font-bold text-center">Lokasi UMKM Kami</div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15786.461926581425!2d115.3296163029701!3d-8.439367139603629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd219077fbb6e81%3A0x19780a29a39361e9!2sSusut%2C%20Bangli%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1735277806750!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </div>
+            <div id="map" class="relative z-10 w-full mt-3 h-96"></div>
+        </div>
     </div>
+
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        var map = L.map('map').setView([-8.423198, 115.346537], 14);
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: ''
+        }).addTo(map);
+
+        var umkms = @json($umkms);
+
+        // Tambahkan marker untuk setiap lokasi
+        umkms.forEach(function(lokasi) {
+            if (lokasi.latitude !== undefined && lokasi.longitude !== undefined) {
+                L.marker([lokasi.latitude, lokasi.longitude]).addTo(map)
+                    .bindPopup(lokasi.nama);
+            } else {
+                console.error("Data lokasi tidak valid:", lokasi);
+            }
+        });
+    </script>
 
 
 </x-app-layout>

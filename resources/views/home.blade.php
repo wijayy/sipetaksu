@@ -31,7 +31,7 @@
             </div>
 
             <div class="flex gap-4 mt-4">
-                <x-a class="text-lg capitalize rounded-none" :active="(!request()->has('kategori') || is_null(request(['kategori'])))" href="{{ route('dashboard') }}">All</x-a>
+                <x-a class="text-lg capitalize rounded-none" :active="(!request()->has('kategori') || is_null(request(['kategori'])))" href="{{ route('home') }}">All</x-a>
                 @foreach ($categories as $item)
                     <x-a class="text-lg capitalize rounded-none" href="{{ route('home', ['kategori' => $item->slug]) }}" :active="($item->slug == request('kategori'))">{{ $item->nama }}</x-a>
                 @endforeach

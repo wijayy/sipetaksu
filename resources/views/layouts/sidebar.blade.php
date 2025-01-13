@@ -1,4 +1,4 @@
-<nav class="fixed top-0 bottom-0 left-0 flex flex-col items-center w-16 h-screen md:w-60 bg-mine-100">
+<nav class="fixed top-0 bottom-0 left-0 flex flex-col items-center w-16 h-screen md:w-60 bg-mine-100 print:hidden">
     <a href="{{ route('home') }}">
         <img src="{{ asset('asset/logo susut.png') }}" class="w-32 px-2 pt-4">
     </a>
@@ -37,7 +37,7 @@
     </div>
 </nav>
 
-<div class="flex items-center justify-end w-full h-16 gap-4 pl-20 pr-4 bg-white shadow-lg md:pl-64">
+<div class="flex items-center justify-end w-full h-16 gap-4 pl-20 pr-4 bg-white shadow-lg md:pl-64 print:hidden">
     <a href="{{ route('profile.edit') }}" class="flex items-center">{{ Auth::user()->name }} <i
             class="text-2xl bx bx-chevron-down"></i></a>
     <form action="{{ route('logout') }}" method="POST">

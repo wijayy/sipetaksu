@@ -19,7 +19,7 @@ class FotoFactory extends Factory
     {
         return [
             'umkm_id' => Umkm::factory(),
-            'image' => 'umkm/produk.png'
+            'image' => 'foto/produk.png',
         ];
     }
 }

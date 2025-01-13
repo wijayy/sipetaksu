@@ -20,7 +20,7 @@ class UmkmController extends Controller {
      */
     public function index() {
         if (Auth::user()->is_admin) {
-            $umkm = Umkm::latest()->paginate(12);
+            $umkm = Umkm::latest()->paginate(25);
         } else {
             $umkm = Umkm::where('user_id', Auth::user()->id)->paginate(12);
         }
@@ -44,18 +44,19 @@ class UmkmController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreUmkmRequest $request) {
-        $validated = $request->validated();
-
+        $validated = $request->validated();;
         try {
             DB::beginTransaction();
-            $images = $validated['image'];
-            $validated['image'] = $request->file("image.0")->store('foto');
+
+            $validated['image'] = $request->file("image")->store('foto');
             $umkm = Umkm::create($validated);
 
-            for ($i = 1; $i < count($images); $i++) {
-                if ($request->file("image.$i")) {
+            for ($i = 0; $i < 7; $i++) {
+                if ($request->file("images.$i")) {
                     $foto['umkm_id'] = $umkm->id;
-                    $foto['image'] = $request->file("image.$i")->store('foto');
+                    $foto['order'] = $i + 1;
+                    $foto['image'] = $request->file("images.$i")->store('foto');
+
                     Foto::create($foto);
                 }
             }
@@ -87,6 +88,7 @@ class UmkmController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Umkm $umkm) {
+        // dd( $umkm->foto->where('order', 1)->first()->image);
         return view('dashboard.umkm.edit', [
             'umkm' => $umkm,
             'kategori' => Categories::all(),
@@ -102,22 +104,25 @@ class UmkmController extends Controller {
         $validated = $request->validated();
         try {
             DB::beginTransaction();
-            if (!isset($validated['image'])) {
-                $validated['image'] = $umkm['image'];
-            } else {
-
-                $images = $validated['image'];
+            if (isset($validated['image'])) {
                 Storage::delete($umkm["image"]);
-                Foto::where("umkm_id", $umkm->id)->delete();
-                $validated['image'] = $request->file("image.0")->store('foto');
-                for ($i = 0; $i < count($images); $i++) {
-                    if ($request->file("image.$i")) {
-                        $foto['umkm_id'] = $umkm->id;
-                        $foto['image'] = $request->file("image.$i")->store('foto');
-                        Foto::create($foto);
-                    }
+                $validated['image'] = $request->file("image")->store('foto');
+            } else {
+                $validated['image'] = $umkm['image'];
+            }
+
+            for ($i = 0; $i < 7; $i++) {
+                if ($request->file("images.$i")) {
+                    Storage::delete($umkm->foto->where('order', $i)->first()->image);
+                    Foto::where('umkm_id', $umkm->id)->where('order', $i + 1)->delete();
+                    $foto['umkm_id'] = $umkm->id;
+                    $foto['order'] = $i + 1;
+                    $foto['image'] = $request->file("images.$i")->store('foto');
+
+                    Foto::create($foto);
                 }
             }
+
             $umkm->update($validated);
 
             DB::commit();

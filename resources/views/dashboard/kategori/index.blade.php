@@ -24,9 +24,9 @@
                     <td class="space-x-3">
                         <div class="grid w-20 grid-cols-2 gap-2 md:w-40 md:grid-cols-4">
                             <a href="{{ route('kategori.show', ['kategori' => $item->slug]) }}"><i
-                                    class="text-2xl text-center border border-black rounded-lg size-9 bx bx-show-alt"></i></a>
+                                    class="text-2xl text-center bg-gray-300 border border-black rounded-lg size-9 bx bx-show-alt"></i></a>
                             <a href="{{ route('dashboard.kategori.edit', ['kategori' => $item->slug]) }}"><i
-                                    class="text-2xl text-center bg-yellow-300 rounded-lg size-9 bx bx-edit"></i></a>
+                                    class="text-2xl text-center bg-yellow-100 border border-yellow-300 rounded-lg size-9 bx bx-edit"></i></a>
                             <form action="{{ route('dashboard.kategori.destroy', ['kategori' => $item->slug]) }}" method="post">
                                 @csrf
                                 @method('delete')
@@ -34,7 +34,7 @@
                                     onclick="event.preventDefault();
                             this.closest('form').submit();">
                                     <i
-                                        class="text-2xl text-center rounded-lg bg-rose-500 size-9 bx bx-trash"></i></a>
+                                        class="text-2xl text-center border rounded-lg bg-rose-100 border-rose-500 size-9 bx bx-trash"></i></a>
                         </div>
                         </form>
                     </td>

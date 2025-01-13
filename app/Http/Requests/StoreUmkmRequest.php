@@ -22,10 +22,13 @@ class StoreUmkmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "image.0" => ["required"],
-            'image.*' => ['file', 'image'],
+            "image" => ['required'],
+            "images.0" => ["required"],
+            'images.*' => ['file', 'image'],
             'nama' => ['required'],
             'categories_id' => "required|numeric",
+            'longitude' => "required|numeric",
+            'latitude' => "required|numeric",
             "kontak" => "required|starts_with:62",
             'maps' => "required|url:http,https",
             'jamBuka' => 'required',

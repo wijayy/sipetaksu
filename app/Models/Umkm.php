@@ -23,7 +23,7 @@ class Umkm extends Model
         return $this->belongsTo(User::class);
     }
     public function foto() {
-        return $this->hasMany(Foto::class);
+        return $this->hasMany(Foto::class)->orderBy('order', 'asc');;
     }
 
     public function getRouteKeyName() {

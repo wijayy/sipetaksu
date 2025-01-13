@@ -2,17 +2,8 @@
     <!-- Session Status -->
     {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
 
-    <div class="flex flex-col items-center justify-center lg:flex-row">
-        <div class="relative w-full bg-right bg-no-repeat bg-cover h-52 lg:h-screen lg:w-4/6 xl:w-3/4"
-            style="background-image: url({{ asset('asset/guest.png') }})">
-            <div class="absolute top-0 left-0 flex items-center justify-center w-full h-full text-center text-white ">
-                <div class="w-11/12 text-2xl lg:text-4xl lg:w-3/4 xl:w-1/2 lg:text-start">Kembangkan Potensi UMKM Susut,
-                    Majukan
-                    Ekonomi Desa!</div>
-            </div>
-        </div>
 
-        <form method="POST" action="{{ route('password.email') }}" class="w-full px-10 sm:w-1/2 lg:w-2/6 xl:w-1/4">
+        <form method="POST" action="{{ route('password.email') }}" class="w-full px-10 sm:w-1/2 lg:w-5/12 xl:w-1/3">
             @csrf
             <img src="{{ asset('asset/login.png') }}" class="w-11/12" alt="">
 
@@ -34,5 +25,4 @@
                 </a>
             </div>
         </form>
-    </div>
 </x-guest-layout>

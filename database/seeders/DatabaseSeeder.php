@@ -47,6 +47,15 @@ class DatabaseSeeder extends Seeder {
 
 
         Umkm::factory(20)->recycle([Categories::all(), User::all()])->create();
-        Foto::factory(50)->recycle(Umkm::all())->create();
+        // Foto::factory(20)->recycle(Umkm::all())->create();
+
+        foreach (Umkm::all() as $item) {
+            for ($i=1; $i < 6; $i++) {
+                Foto::factory(1)->recycle( $item)->create(
+                    ['order' => $i,]
+                );
+
+            }
+        }
     }
 }

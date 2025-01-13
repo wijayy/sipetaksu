@@ -16,9 +16,11 @@
             <div class="">Kode Pos : 80661</div>
         </div>
         <div class="w-full pt-4 lg:space-y-3 lg:text-center lg:pt-0 md:w-1/2 lg:w-3/12">
-            <h2 class="text-xl font-bold ">UMKM</h2>
+            <h2 class="flex flex-col text-xl font-bold">UMKM</h2>
             @foreach ($categories as $item)
-                <div class="capitalize">{{ $item->nama }}</div>
+            <div class="">
+                <a href="{{ route('kategori.show', ['kategori'=>$item->slug]) }}" class="capitalize">{{ $item->nama }}</a>
+            </div>
             @endforeach
         </div>
     </div>

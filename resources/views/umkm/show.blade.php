@@ -11,8 +11,8 @@
     <div class="grid grid-cols-1 gap-8 p-6 mx-auto lg:grid-cols-2 max-w-7xl lg:px-8">
         <div class="flex flex-col items-center gap-3">
             <h2 class="p-2 text-xl font-bold text-white rounded-lg lg:text-3xl bg-mine-100">{{ $umkm->nama }}</h2>
-            <div class="p-3 rounded-xl w-fit bg-mine-100">
-                <img class="rounded-3xl" src="{{ asset('storage/' . $umkm->image) }}" alt="">
+            <div class="relative w-4/6 p-3 overflow-hidden rounded-xl bg-mine-100 aspect-square">
+                <img class="absolute -translate-x-1/2 -translate-y-1/2 rounded-3xl top-1/2 left-1/2 size-11/12" src="{{ asset('storage/' . $umkm->image) }}" alt="">
             </div>
         </div>
         <div class="">
@@ -27,8 +27,6 @@
                                     class="bx bx-trash"></i>Hapus</button>
                         </form>
                     @endif
-                    <div href="" class="hidden px-3 py-2 space-y-2 bg-blue-400 rounded-lg cursor-pointer lg:block"><i
-                            class="bx bx-printer" onclick="printPage()"></i>Cetak</div>
                 </div>
             @endauth
             <div class="">
@@ -62,17 +60,14 @@
         <div class="flex justify-center w-full text-lg font-bold text-white rounded-lg lg:text-2xl">
             <div class="px-3 py-2 rounded-lg bg-mine-100">Foto Produk {{ $umkm->nama }}</div>
         </div>
-        <div class="grid grid-cols-2 gap-3 pt-4 lg:grid-cols-3">
+        <div class="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-3 lg:grid-cols-6">
             @foreach ($umkm->foto as $item)
-                <img class="" src="{{ asset('storage/' . $item->image) }}" alt="">
+                <div class="relative overflow-hidden rounded-lg aspect-square">
+                    <img class="absolute object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 size-full"
+                        src="{{ asset('storage/' . $item->image) }}" alt="">
+                </div>
             @endforeach
         </div>
     </div>
 
 </x-app-layout>
-
-<script>
-    function printPage() {
-        window.print();
-    }
-</script>

@@ -21,6 +21,8 @@ return new class extends Migration {
             $table->text('alamat');
             $table->text('deskripsi');
             $table->string('maps');
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('image');
             $table->time('jamBuka');
             $table->time('jamTutup');

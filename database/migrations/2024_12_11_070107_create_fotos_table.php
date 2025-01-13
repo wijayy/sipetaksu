@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Umkm::class);
             $table->string('image');
+            $table->integer('order');
+            $table->unique(['order', 'umkm_id']);
             $table->timestamps();
         });
     }
